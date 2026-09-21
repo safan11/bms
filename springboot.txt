@@ -1,0 +1,924 @@
+
+SPRING BOOT 
+====================================
+
+PART 1 – WHY DO WE NEED SPRING?
+--------------------------------
+
+Imagine we are developing a large Java application.
+
+We need to handle:
+
+    Web Requests
+    Database
+    Security
+    Transactions
+    REST APIs
+    Business Logic
+    Configuration
+    Testing
+
+If we write everything ourselves,
+the application becomes difficult to maintain.
+
+SPRING helps us build enterprise Java applications
+in a structured and easier way.
+
+
+--------------------------------------------------
+WHY SPRING?
+--------------------------------------------------
+
+Spring provides ready-made support for:
+
+    Web applications
+    REST APIs
+    Database access
+    Transactions
+    Security
+    Testing
+    Integration
+
+Main idea:
+
+    Spring = Framework for building Java applications
+
+
+==================================================
+PART 2 – IMPORTANT SPRING MODULES
+==================================================
+
+Think of Spring as a collection of modules.
+
+                    SPRING
+                       |
+     +-----------------+------------------+
+     |                 |                  |
+   WEB              DATA              SECURITY
+     |                 |                  |
+Spring MVC       Spring JDBC/JPA     Spring Security
+Spring WebFlux
+
+
+Other important modules:
+
+Spring Core
+    → Basic Spring container and dependency management
+
+Spring MVC
+    → Web applications and REST APIs
+
+Spring Data
+    → Easier database access
+
+Spring Security
+    → Authentication and Authorization
+
+Spring Test
+    → Testing Spring applications
+
+
+IMPORTANT:
+
+You don't need every Spring module
+for every project.
+
+Choose what your application needs.
+
+
+==================================================
+PART 3 – WHAT IS SPRING BOOT?
+==================================================
+
+Spring Boot is built on top of Spring.
+
+Spring Boot makes Spring development easier.
+
+Spring:
+
+    Powerful
+    Flexible
+    More configuration
+
+Spring Boot:
+
+    Spring + Auto Configuration
+          + Starters
+          + Embedded Server
+          + Easy setup
+
+
+Simple definition:
+
+Spring Boot = Easy way to build Spring applications.
+
+
+==================================================
+SPRING vs SPRING BOOT
+==================================================
+
+Spring
+    ↓
+Framework
+
+Spring Boot
+    ↓
+Makes Spring development easier
+
+
+| Spring                  | Spring Boot              |
+|-------------------------|--------------------------|
+| More configuration      | Less configuration       |
+| Setup can be complex    | Easy setup               |
+| External server often   | Embedded server          |
+| Dependencies manually   | Starters                 |
+| More setup              | Auto Configuration       |
+
+
+Remember:
+
+SPRING BOOT DOES NOT REPLACE SPRING.
+
+Spring Boot USES Spring.
+
+
+==================================================
+PART 4 – CREATE A SPRING BOOT PROJECT
+==================================================
+
+Use:
+
+    https://start.spring.io
+
+
+Select:
+
+Project:
+    Maven
+
+Language:
+    Java
+
+Spring Boot:
+    Current stable version
+
+Packaging:
+    Jar
+
+Java:
+    Current LTS version used in your project
+
+
+Add dependencies:
+
+    Spring Web
+    Spring Data JPA
+    MySQL Driver
+
+
+Generate Project
+
+Download ZIP
+
+Extract
+
+Open in IntelliJ / Eclipse / VS Code
+
+
+==================================================
+PART 5 – WHAT IS A STARTER?
+==================================================
+
+Starter = Group of commonly required dependencies.
+
+Instead of adding many dependencies manually:
+
+    Add Spring Web Starter
+
+
+Spring Boot provides required dependencies.
+
+Example:
+
+spring-boot-starter-web
+
+Used for:
+
+    REST API
+    Spring MVC
+    Embedded server
+
+
+Other common starters:
+
+spring-boot-starter-data-jpa
+    → Database + JPA
+
+spring-boot-starter-security
+    → Security
+
+spring-boot-starter-test
+    → Testing
+
+
+Easy definition:
+
+STARTER = Ready-made dependency package
+
+
+==================================================
+PART 6 – WHAT IS AUTO CONFIGURATION?
+==================================================
+
+This is one of the most important Spring Boot features.
+
+Spring Boot looks at:
+
+    Dependencies
+    Configuration
+    Application environment
+
+Then automatically configures many things
+that are commonly required.
+
+
+Example:
+
+If we add:
+
+    spring-boot-starter-web
+
+Spring Boot automatically configures
+the web application infrastructure.
+
+If we add:
+
+    spring-boot-starter-data-jpa
+
+Spring Boot configures the JPA-related infrastructure
+based on the application's configuration.
+
+
+Simple idea:
+
+YOU ADD DEPENDENCY
+        ↓
+SPRING BOOT DETECTS IT
+        ↓
+AUTO CONFIGURATION
+        ↓
+READY TO USE
+
+
+==================================================
+PART 7 – SPRING BOOT MAIN CLASS
+==================================================
+
+@SpringBootApplication
+public class EmployeeApplication {
+
+    public static void main(String[] args) {
+
+        SpringApplication.run(
+            EmployeeApplication.class,
+            args
+        );
+    }
+}
+
+
+@SpringBootApplication is the main Spring Boot annotation.
+
+It enables important Spring Boot features,
+including component scanning and auto-configuration.
+
+
+==================================================
+PART 8 – LAYERED ARCHITECTURE
+==================================================
+
+Don't put everything in one class.
+
+Divide the application into layers.
+
+
+              CLIENT
+                |
+                ↓
+        +----------------+
+        |   CONTROLLER   |
+        +----------------+
+                |
+                ↓
+        +----------------+
+        |    SERVICE     |
+        +----------------+
+                |
+                ↓
+        +----------------+
+        |  REPOSITORY    |
+        +----------------+
+                |
+                ↓
+           DATABASE
+
+
+Each layer has ONE main responsibility.
+
+
+==================================================
+1. CONTROLLER
+==================================================
+
+Controller handles HTTP requests.
+
+Example:
+
+Client sends:
+
+GET /employees
+
+
+Controller receives the request.
+
+Controller's job:
+
+    Receive request
+    Read input
+    Call Service
+    Return response
+
+
+Think:
+
+CONTROLLER
+    ↓
+Handles HTTP/API
+
+
+Example:
+
+@RestController
+@RequestMapping("/employees")
+public class EmployeeController {
+
+    @GetMapping
+    public String getEmployees() {
+        return "Employee List";
+    }
+}
+
+
+==================================================
+2. SERVICE
+==================================================
+
+Service contains BUSINESS LOGIC.
+
+Example:
+
+    Calculate salary
+    Validate employee
+    Apply business rules
+    Process employee data
+
+
+Think:
+
+SERVICE
+    ↓
+Business Logic
+
+
+Example:
+
+@Service
+public class EmployeeService {
+
+    public String getEmployee() {
+
+        return "Employee Data";
+    }
+}
+
+
+Controller should call Service.
+
+Controller
+    ↓
+Service
+
+
+NOT:
+
+Controller
+    ↓
+Database
+
+
+==================================================
+3. REPOSITORY
+==================================================
+
+Repository talks to the database.
+
+Think:
+
+REPOSITORY
+    ↓
+Database Access
+
+
+Example:
+
+@Repository
+public interface EmployeeRepository
+        extends JpaRepository<Employee, Integer> {
+
+}
+
+
+Spring Data JPA provides methods such as:
+
+    save()
+    findById()
+    findAll()
+    deleteById()
+
+
+So we don't need to write
+basic SQL for every operation.
+
+
+==================================================
+4. ENTITY
+==================================================
+
+Entity represents database data.
+
+Example:
+
+@Entity
+public class Employee {
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    private String name;
+    private String department;
+    private double salary;
+    private String city;
+}
+
+
+Think:
+
+ENTITY
+    ↓
+Java Object ↔ Database Table
+
+
+==================================================
+COMPLETE FLOW
+==================================================
+
+Client
+
+   |
+   | GET /employees
+   ↓
+
+Controller
+
+   |
+   ↓
+
+Service
+
+   |
+   ↓
+
+Repository
+
+   |
+   ↓
+
+Database
+
+
+Response comes back:
+
+Database
+   ↓
+Repository
+   ↓
+Service
+   ↓
+Controller
+   ↓
+Client
+
+
+==================================================
+PART 9 – COMPLETE EMPLOYEE EXAMPLE
+==================================================
+
+PROJECT STRUCTURE:
+
+employee-app
+    |
+    +-- controller
+    |      |
+    |      +-- EmployeeController.java
+    |
+    +-- service
+    |      |
+    |      +-- EmployeeService.java
+    |
+    +-- repository
+    |      |
+    |      +-- EmployeeRepository.java
+    |
+    +-- entity
+    |      |
+    |      +-- Employee.java
+    |
+    +-- EmployeeApplication.java
+
+
+==================================================
+EMPLOYEE ENTITY
+==================================================
+
+@Entity
+public class Employee {
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    private String name;
+    private String department;
+    private double salary;
+    private String city;
+
+}
+
+
+5 fields:
+
+id
+name
+department
+salary
+city
+
+
+==================================================
+REPOSITORY
+==================================================
+
+public interface EmployeeRepository
+        extends JpaRepository<Employee, Integer> {
+
+}
+
+
+Why?
+
+Because Repository handles database operations.
+
+
+==================================================
+SERVICE
+==================================================
+
+@Service
+public class EmployeeService {
+
+    private EmployeeRepository repository;
+
+    public EmployeeService(
+            EmployeeRepository repository) {
+
+        this.repository = repository;
+    }
+
+    public List<Employee> getEmployees() {
+
+        return repository.findAll();
+    }
+}
+
+
+Why Service?
+
+Business logic belongs here.
+
+
+==================================================
+CONTROLLER
+==================================================
+
+@RestController
+@RequestMapping("/employees")
+public class EmployeeController {
+
+    private EmployeeService service;
+
+    public EmployeeController(
+            EmployeeService service) {
+
+        this.service = service;
+    }
+
+    @GetMapping
+    public List<Employee> getEmployees() {
+
+        return service.getEmployees();
+    }
+}
+
+
+==================================================
+WHAT HAPPENS WHEN WE CALL API?
+==================================================
+
+Browser / Postman
+
+GET:
+
+/employees
+
+        ↓
+
+EmployeeController
+
+        ↓
+
+EmployeeService
+
+        ↓
+
+EmployeeRepository
+
+        ↓
+
+Database
+
+        ↓
+
+EmployeeRepository
+
+        ↓
+
+EmployeeService
+
+        ↓
+
+EmployeeController
+
+        ↓
+
+JSON Response
+
+
+==================================================
+PART 10 – TWO SIMPLE REST APIs
+==================================================
+
+
+API 1 – GET ALL EMPLOYEES
+
+GET /employees
+
+Controller:
+
+@GetMapping
+public List<Employee> getEmployees() {
+
+    return service.getEmployees();
+}
+
+
+API 2 – GET EMPLOYEE BY ID
+
+GET /employees/101
+
+
+Controller:
+
+@GetMapping("/{id}")
+public Employee getEmployee(
+        @PathVariable Integer id) {
+
+    return service.getEmployee(id);
+}
+
+
+Service:
+
+public Employee getEmployee(Integer id) {
+
+    return repository.findById(id)
+            .orElseThrow();
+}
+
+
+==================================================
+PART 11 – WHY DO WE NEED LAYERS?
+==================================================
+
+Without layers:
+
+Controller
+    |
+    +-- Business Logic
+    |
+    +-- SQL
+    |
+    +-- Validation
+    |
+    +-- Database
+    |
+    +-- Response
+
+Everything becomes mixed.
+
+
+With layers:
+
+Controller
+    ↓
+Service
+    ↓
+Repository
+    ↓
+Database
+
+
+Benefits:
+
+    Easy to understand
+    Easy to maintain
+    Easy to test
+    Easy to change
+    Clear responsibility
+
+
+==================================================
+EASY WAY TO REMEMBER EACH LAYER
+==================================================
+
+CONTROLLER
+    ↓
+"What request did the user send?"
+
+
+SERVICE
+    ↓
+"What should the application do?"
+
+
+REPOSITORY
+    ↓
+"How do I get/save data?"
+
+
+ENTITY
+    ↓
+"What does my data look like?"
+
+
+DATABASE
+    ↓
+"Where is the data stored?"
+
+
+==================================================
+MOST IMPORTANT ANNOTATIONS
+==================================================
+
+@SpringBootApplication
+    → Main Spring Boot application
+
+@RestController
+    → REST Controller
+
+@RequestMapping
+    → Common URL
+
+@GetMapping
+    → GET request
+
+@PostMapping
+    → POST request
+
+@PutMapping
+    → PUT request
+
+@DeleteMapping
+    → DELETE request
+
+@Service
+    → Service class
+
+@Repository
+    → Repository layer
+
+@Entity
+    → Database entity
+
+@Id
+    → Primary key
+
+@Autowired
+    → Dependency injection
+      (Constructor injection is preferred)
+
+
+==================================================
+REST API METHODS
+==================================================
+
+GET
+    → Read data
+
+POST
+    → Create data
+
+PUT
+    → Update data
+
+DELETE
+    → Delete data
+
+
+Employee API:
+
+GET     /employees
+POST    /employees
+GET     /employees/{id}
+PUT     /employees/{id}
+DELETE  /employees/{id}
+
+
+==================================================
+FINAL PICTURE
+==================================================
+
+                 SPRING BOOT
+                      |
+          +-----------+-----------+
+          |                       |
+       STARTERS            AUTO CONFIGURATION
+          |                       |
+          +-----------+-----------+
+                      |
+                      ↓
+                 REST API
+                      |
+                      ↓
+                 CONTROLLER
+                      |
+                      ↓
+                   SERVICE
+                      |
+                      ↓
+                 REPOSITORY
+                      |
+                      ↓
+                  DATABASE
+
+
+REMEMBER:
+
+Controller  → API / HTTP
+
+Service     → Business Logic
+
+Repository  → Database
+
+Entity      → Data / Table
+
+
+AND:
+
+Spring      = Framework
+
+Spring Boot = Easier way to build Spring applications
+
+Starter     = Ready-made dependency group
+
+Auto Config = Spring Boot configures common setup automatically
+
+
+==================================================
+ONE-LINE SUMMARY FOR STUDENTS
+==================================================
+
+"Spring Boot helps us build Java applications quickly,
+and layered architecture helps us organize the application
+into Controller, Service, Repository and Database."
+
