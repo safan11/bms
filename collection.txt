@@ -1,0 +1,348 @@
+JAVA COLLECTIONS – 
+===============================
+
+WHAT IS A COLLECTION?
+---------------------
+
+Collection = Used to store multiple objects/data.
+
+Example:
+
+Employee e1;
+Employee e2;
+Employee e3;
+
+Instead of creating many variables,
+we can use a Collection.
+
+
+=================================================
+1. MAIN COLLECTION TYPES
+=================================================
+
+                    COLLECTION
+                        |
+             +----------+----------+
+             |                     |
+            LIST                   SET
+             |                     |
+        +----+----+          +-----+-----+
+        |         |          |     |     |
+        ↓         ↓          ↓     ↓     ↓
+    ArrayList LinkedList  HashSet LinkedHashSet TreeSet
+
+
+                    MAP
+                     |
+          +----------+----------+
+          |          |          |
+          ↓          ↓          ↓
+       HashMap  LinkedHashMap TreeMap
+
+
+For now, remember:
+
+LIST → Allows duplicates
+SET  → Does NOT allow duplicates
+MAP  → Key + Value
+
+
+=================================================
+2. EMPLOYEE CLASS
+=================================================
+
+class Employee {
+
+    int id;
+    String name;
+    String department;
+    double salary;
+    String city;
+
+    Employee(int id, String name,
+             String department,
+             double salary,
+             String city) {
+
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.salary = salary;
+        this.city = city;
+    }
+}
+
+
+Example Employee:
+
+101, "Amit", "IT", 60000, "Bangalore"
+
+
+=================================================
+3. LIST
+=================================================
+
+List = Ordered collection.
+
+Duplicates are allowed.
+
+
+        LIST
+          |
+     +----+----+
+     |         |
+     ↓         ↓
+ ArrayList  LinkedList
+
+
+-------------------------------------------------
+ARRAYLIST
+-------------------------------------------------
+
+Most commonly used List.
+
+List<Employee> employees = new ArrayList<>();
+
+employees.add(
+    new Employee(101, "Amit",
+                 "IT", 60000, "Bangalore")
+);
+
+employees.add(
+    new Employee(102, "Rahul",
+                 "HR", 50000, "Chennai")
+);
+
+employees.add(
+    new Employee(103, "Priya",
+                 "IT", 70000, "Bangalore")
+);
+
+
+Read data:
+
+for(Employee e : employees) {
+    System.out.println(e.name);
+}
+
+
+Remember:
+
+ArrayList
+   ↓
+Order + Duplicates
+
+
+-------------------------------------------------
+LINKEDLIST
+-------------------------------------------------
+
+List<Employee> employees = new LinkedList<>();
+
+employees.add(employee1);
+employees.add(employee2);
+
+employees.addFirst(employee3);
+employees.addLast(employee4);
+
+
+Remember:
+
+LinkedList
+   ↓
+Good for adding/removing elements
+
+
+=================================================
+4. SET
+=================================================
+
+Set = Unique data.
+
+Duplicate values are not allowed.
+
+
+         SET
+           |
+     +-----+-----+------+
+     |           |      |
+     ↓           ↓      ↓
+ HashSet   LinkedHashSet TreeSet
+
+
+-------------------------------------------------
+HASHSET
+-------------------------------------------------
+
+Set<String> departments = new HashSet<>();
+
+departments.add("IT");
+departments.add("HR");
+departments.add("IT");
+
+IT is stored only once.
+
+
+Remember:
+
+HashSet
+   ↓
+Unique
+
+
+-------------------------------------------------
+LINKEDHASHSET
+-------------------------------------------------
+
+Set<String> departments =
+        new LinkedHashSet<>();
+
+departments.add("IT");
+departments.add("HR");
+departments.add("Finance");
+
+
+Remember:
+
+LinkedHashSet
+      ↓
+Unique + Insertion Order
+
+
+-------------------------------------------------
+TREESET
+-------------------------------------------------
+
+Set<String> departments =
+        new TreeSet<>();
+
+departments.add("IT");
+departments.add("HR");
+departments.add("Finance");
+
+
+Output is sorted:
+
+Finance
+HR
+IT
+
+
+Remember:
+
+TreeSet
+   ↓
+Unique + Sorted
+
+
+=================================================
+5. MAP
+=================================================
+
+Map stores data as:
+
+KEY → VALUE
+
+
+Example:
+
+Employee ID → Employee
+
+
+        MAP
+         |
+   +-----+-----+
+   |     |     |
+   ↓     ↓     ↓
+HashMap LinkedHashMap TreeMap
+
+
+-------------------------------------------------
+HASHMAP
+-------------------------------------------------
+
+Map<Integer, Employee> employees =
+        new HashMap<>();
+
+employees.put(101, employee1);
+employees.put(102, employee2);
+employees.put(103, employee3);
+
+
+Find employee:
+
+Employee e = employees.get(102);
+
+
+Think:
+
+102 → Rahul
+
+
+Remember:
+
+HashMap
+   ↓
+Key + Value
+
+
+=================================================
+6. EASY COMPARISON
+=================================================
+
+| Collection      | Simple Meaning              |
+|-----------------|-----------------------------|
+| ArrayList       | Ordered + duplicates        |
+| LinkedList      | Easy add/remove             |
+| HashSet         | Unique data                 |
+| LinkedHashSet   | Unique + insertion order    |
+| TreeSet         | Unique + sorted             |
+| HashMap         | Key + Value                 |
+| LinkedHashMap   | Key + Value + order         |
+| TreeMap         | Key + Value + sorted key    |
+
+
+=================================================
+7. MOST IMPORTANT FOR BEGINNERS
+=================================================
+
+Start with these 3:
+
+ArrayList
+    ↓
+Store multiple objects
+
+
+HashSet
+    ↓
+Store unique objects
+
+
+HashMap
+    ↓
+Store data using KEY + VALUE
+
+
+=================================================
+MEMORY TRICK
+=================================================
+
+LIST → ORDER
+
+SET → UNIQUE
+
+MAP → KEY + VALUE
+
+
+Real-world example:
+
+ArrayList
+    → List of employees
+
+HashSet
+    → Unique departments
+
+HashMap
+    → Employee ID → Employee
+
+
