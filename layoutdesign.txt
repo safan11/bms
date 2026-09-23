@@ -1,0 +1,1848 @@
+ANGULAR LAYOUT DESIGN - BEGINNER TRAINING NOTES
+================================================
+
+TWO COMPLETE ANGULAR APPLICATIONS
+
+APPLICATION 1:
+Angular Layout using Basic HTML + CSS
+
+APPLICATION 2:
+Angular Layout using Bootstrap
+
+IMPORTANT:
+----------
+Both applications use the traditional Angular Module-based approach.
+
+We are NOT using standalone components.
+
+Project structure will contain:
+
+    app.module.ts
+    app.component.ts
+    app.component.html
+    app.component.css
+
+
+============================================================
+PART 1 - WHAT IS A WEB PAGE LAYOUT?
+============================================================
+
+Before writing Angular code, explain the idea of a layout.
+
+A typical web application can be divided into different areas:
+
+    +------------------------------------------------+
+    |                    HEADER                      |
+    +-------------------+----------------------------+
+    |                   |                            |
+    |      SIDEBAR      |        MAIN CONTENT        |
+    |                   |                            |
+    |   Dashboard       |   Employee Dashboard       |
+    |   Employees       |                            |
+    |   Departments     |   Employee information    |
+    |   Reports         |                            |
+    |                   |                            |
+    +-------------------+----------------------------+
+    |                    FOOTER                      |
+    +------------------------------------------------+
+
+
+HEADER
+------
+Usually contains:
+
+    Application name
+    Logo
+    Top navigation
+    User information
+
+
+SIDEBAR
+-------
+Usually contains navigation:
+
+    Dashboard
+    Employees
+    Departments
+    Reports
+
+
+MAIN CONTENT
+------------
+This is the main area where application information is displayed.
+
+For example:
+
+    Employee list
+    Product list
+    Dashboard
+    Forms
+    Reports
+
+
+FOOTER
+------
+Usually contains:
+
+    Copyright
+    Company information
+    Contact information
+
+
+IMPORTANT IDEA:
+
+Angular does not automatically create this layout.
+
+We create the layout using:
+
+    HTML
+    CSS
+    Angular Components
+
+Bootstrap can later make the CSS/layout work much easier.
+
+
+============================================================
+APPLICATION 1
+ANGULAR LAYOUT USING BASIC CSS
+============================================================
+
+
+GOAL
+----
+
+We will create:
+
+    Header
+    Sidebar
+    Main Content
+    Footer
+
+
+The final page will look conceptually like this:
+
+    +------------------------------------------------+
+    |              EMPLOYEE MANAGEMENT               |
+    |                    HEADER                      |
+    +-------------------+----------------------------+
+    |                   |                            |
+    |    DASHBOARD      |     EMPLOYEE DASHBOARD    |
+    |    EMPLOYEES      |                            |
+    |    DEPARTMENTS    |     Total Employees: 120  |
+    |    REPORTS        |     Active Employees: 105 |
+    |                   |                            |
+    +-------------------+----------------------------+
+    |                    FOOTER                      |
+    +------------------------------------------------+
+
+
+============================================================
+STEP 1 - CREATE THE ANGULAR PROJECT
+============================================================
+
+Open VS Code.
+
+Open Terminal.
+
+Run:
+
+    ng new employee-layout-css --no-standalone
+
+When Angular asks:
+
+    Would you like to add Angular routing?
+
+Choose:
+
+    No
+
+When Angular asks:
+
+    Which stylesheet format?
+
+Choose:
+
+    CSS
+
+
+Go inside the project:
+
+    cd employee-layout-css
+
+
+Start the application:
+
+    ng serve
+
+
+Open the browser:
+
+    http://localhost:4200
+
+
+============================================================
+STEP 2 - UNDERSTAND THE PROJECT
+============================================================
+
+Important files:
+
+    src
+      |
+      +-- app
+           |
+           +-- app.component.ts
+           +-- app.component.html
+           +-- app.component.css
+           +-- app.module.ts
+
+
+Explain to participants:
+
+app.module.ts
+-------------
+This is the Angular module.
+
+It keeps track of the components and modules used by our application.
+
+
+app.component.ts
+----------------
+Contains the TypeScript logic of the component.
+
+
+app.component.html
+------------------
+Contains the HTML/UI.
+
+
+app.component.css
+-----------------
+Contains CSS for the component.
+
+
+Simple way to remember:
+
+    .ts
+     |
+     +---- Logic
+
+    .html
+     |
+     +---- UI
+
+    .css
+     |
+     +---- Design
+
+
+============================================================
+STEP 3 - CREATE FOUR COMPONENTS
+============================================================
+
+We need:
+
+    Header
+    Sidebar
+    Main Content
+    Footer
+
+
+Run:
+
+    ng g c header
+
+    ng g c sidebar
+
+    ng g c main-content
+
+    ng g c footer
+
+
+Short command:
+
+    ng g c header
+    ng g c sidebar
+    ng g c main-content
+    ng g c footer
+
+
+Angular creates files automatically.
+
+Example:
+
+header:
+
+    header.component.ts
+    header.component.html
+    header.component.css
+    header.component.spec.ts
+
+
+We don't need to focus on the spec file now.
+
+
+============================================================
+STEP 4 - UNDERSTAND app.module.ts
+============================================================
+
+Open:
+
+    src/app/app.module.ts
+
+
+Angular will automatically add our components to declarations.
+
+It will look similar to:
+
+    @NgModule({
+      declarations: [
+        AppComponent,
+        HeaderComponent,
+        SidebarComponent,
+        MainContentComponent,
+        FooterComponent
+      ],
+      imports: [
+        BrowserModule
+      ],
+      providers: [],
+      bootstrap: [
+        AppComponent
+      ]
+    })
+
+
+IMPORTANT:
+
+Do not explain every line in detail at this stage.
+
+Tell participants:
+
+    "Angular knows about our components because they are declared
+     in the module."
+
+
+The important section is:
+
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        SidebarComponent,
+        MainContentComponent,
+        FooterComponent
+    ]
+
+
+============================================================
+STEP 5 - CREATE THE HEADER
+============================================================
+
+Open:
+
+    header.component.html
+
+
+Write:
+
+    <header>
+        <h1>Employee Management System</h1>
+        <p>Angular Training Application</p>
+    </header>
+
+
+Now open:
+
+    header.component.css
+
+
+Write:
+
+    header {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    p {
+        margin: 5px 0 0;
+    }
+
+
+EXPLANATION:
+
+header
+------
+This selects the HTML <header> element.
+
+
+background-color
+----------------
+Sets the background color.
+
+
+color
+-----
+Sets the text color.
+
+
+padding
+-------
+Creates space inside the header.
+
+
+text-align
+----------
+Controls the alignment of text.
+
+
+margin
+------
+Controls space outside an element.
+
+
+IMPORTANT:
+
+CSS works like:
+
+    property: value;
+
+
+Example:
+
+    color: white;
+
+means:
+
+    Property = color
+    Value    = white
+
+
+============================================================
+STEP 6 - CREATE THE SIDEBAR
+============================================================
+
+Open:
+
+    sidebar.component.html
+
+
+Write:
+
+    <aside>
+
+        <h3>Menu</h3>
+
+        <ul>
+            <li>Dashboard</li>
+            <li>Employees</li>
+            <li>Departments</li>
+            <li>Reports</li>
+        </ul>
+
+    </aside>
+
+
+Open:
+
+    sidebar.component.css
+
+
+Write:
+
+    aside {
+        width: 200px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        min-height: 400px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        padding: 10px;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
+    li:hover {
+        background-color: #ddd;
+    }
+
+
+EXPLANATION:
+
+width
+-----
+Controls the width of the sidebar.
+
+
+padding
+-------
+Creates space inside the sidebar.
+
+
+min-height
+----------
+Makes the sidebar at least a certain height.
+
+
+list-style: none
+----------------
+Removes the default bullet points.
+
+
+cursor: pointer
+---------------
+Changes the mouse cursor when hovering.
+
+
+:hover
+------
+Applies CSS when the mouse moves over the element.
+
+
+============================================================
+STEP 7 - CREATE MAIN CONTENT
+============================================================
+
+Open:
+
+    main-content.component.html
+
+
+Write:
+
+    <main>
+
+        <h2>Employee Dashboard</h2>
+
+        <p>Welcome to the Employee Management System.</p>
+
+        <div class="card">
+
+            <h3>Total Employees</h3>
+
+            <p>120</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Active Employees</h3>
+
+            <p>105</p>
+
+        </div>
+
+    </main>
+
+
+Open:
+
+    main-content.component.css
+
+
+Write:
+
+    main {
+        padding: 20px;
+        flex: 1;
+    }
+
+    .card {
+        display: inline-block;
+        width: 200px;
+        padding: 20px;
+        margin: 10px;
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+
+IMPORTANT CONCEPT:
+
+    flex: 1;
+
+
+This tells the main content:
+
+    "Use the remaining available space."
+
+
+We will use this when creating the complete layout.
+
+
+============================================================
+STEP 8 - CREATE FOOTER
+============================================================
+
+Open:
+
+    footer.component.html
+
+
+Write:
+
+    <footer>
+
+        <p>
+            Copyright 2026 - Employee Management System
+        </p>
+
+    </footer>
+
+
+Open:
+
+    footer.component.css
+
+
+Write:
+
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 15px;
+    }
+
+
+============================================================
+STEP 9 - PUT ALL COMPONENTS TOGETHER
+============================================================
+
+Now we need to display the four components.
+
+Open:
+
+    app.component.html
+
+
+Replace everything with:
+
+    <app-header></app-header>
+
+    <div class="layout">
+
+        <app-sidebar></app-sidebar>
+
+        <app-main-content></app-main-content>
+
+    </div>
+
+    <app-footer></app-footer>
+
+
+IMPORTANT:
+
+These:
+
+    <app-header>
+    <app-sidebar>
+    <app-main-content>
+    <app-footer>
+
+are Angular component selectors.
+
+Angular replaces them with the corresponding component HTML.
+
+
+For example:
+
+    <app-header></app-header>
+
+means:
+
+    "Display HeaderComponent here."
+
+
+============================================================
+STEP 10 - CREATE THE MAIN LAYOUT CSS
+============================================================
+
+Open:
+
+    app.component.css
+
+
+Write:
+
+    .layout {
+        display: flex;
+        min-height: 400px;
+    }
+
+
+This is the most important CSS in our layout.
+
+
+WHAT DOES display: flex DO?
+---------------------------
+
+It allows elements to be arranged easily in a row or column.
+
+
+We have:
+
+    <div class="layout">
+
+        <app-sidebar></app-sidebar>
+
+        <app-main-content></app-main-content>
+
+    </div>
+
+
+Because .layout has:
+
+    display: flex;
+
+
+the two components appear next to each other:
+
+    SIDEBAR | MAIN CONTENT
+
+
+Without flex:
+
+    SIDEBAR
+
+    MAIN CONTENT
+
+
+With flex:
+
+    SIDEBAR | MAIN CONTENT
+
+
+This is the basic idea of Flexbox.
+
+
+============================================================
+STEP 11 - COMPLETE APPLICATION 1
+============================================================
+
+Our component structure is:
+
+    AppComponent
+          |
+          +---- HeaderComponent
+          |
+          +---- SidebarComponent
+          |
+          +---- MainContentComponent
+          |
+          +---- FooterComponent
+
+
+The browser layout becomes:
+
+    +-----------------------------------------+
+    |                HEADER                   |
+    +------------------+----------------------+
+    |                  |                      |
+    |     SIDEBAR      |    MAIN CONTENT     |
+    |                  |                      |
+    |     Dashboard    |    Employee         |
+    |     Employees    |    Dashboard        |
+    |     Departments  |                      |
+    |     Reports      |    Total: 120       |
+    |                  |    Active: 105      |
+    +------------------+----------------------+
+    |                 FOOTER                  |
+    +-----------------------------------------+
+
+
+============================================================
+APPLICATION 1 - WHAT PARTICIPANTS LEARNED
+============================================================
+
+1. Angular project creation
+
+2. Module-based Angular
+
+3. app.module.ts
+
+4. Angular components
+
+5. Component selectors
+
+6. HTML structure
+
+7. CSS basics
+
+8. display: flex
+
+9. width
+
+10. padding
+
+11. margin
+
+12. background-color
+
+13. color
+
+14. hover
+
+15. Creating a complete page layout
+
+
+============================================================
+APPLICATION 2
+ANGULAR LAYOUT USING BOOTSTRAP
+============================================================
+
+
+NOW ASK PARTICIPANTS:
+
+"Do we always need to write all this CSS ourselves?"
+
+Answer:
+
+    No.
+
+We can use Bootstrap.
+
+Bootstrap provides ready-made CSS classes.
+
+Instead of writing:
+
+    display: flex;
+    padding: 20px;
+    margin: 10px;
+
+we can often use Bootstrap classes.
+
+
+============================================================
+STEP 1 - CREATE SECOND PROJECT
+============================================================
+
+Open another terminal.
+
+Run:
+
+    ng new employee-layout-bootstrap --no-standalone
+
+
+Choose:
+
+    Routing → No
+
+    Stylesheet → CSS
+
+
+Go inside:
+
+    cd employee-layout-bootstrap
+
+
+============================================================
+STEP 2 - INSTALL BOOTSTRAP
+============================================================
+
+Run:
+
+    npm install bootstrap
+
+
+Now Bootstrap is available in the project.
+
+
+============================================================
+STEP 3 - ADD BOOTSTRAP TO ANGULAR
+============================================================
+
+Open:
+
+    angular.json
+
+
+Find:
+
+    "styles": [
+        "src/styles.css"
+    ]
+
+
+Change it to:
+
+    "styles": [
+        "node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "src/styles.css"
+    ]
+
+
+Save the file.
+
+
+Restart Angular if required:
+
+    ng serve
+
+
+IMPORTANT:
+
+Bootstrap is now available throughout our application.
+
+
+============================================================
+STEP 4 - CREATE COMPONENTS
+============================================================
+
+Run:
+
+    ng g c header
+
+    ng g c sidebar
+
+    ng g c main-content
+
+    ng g c footer
+
+
+Again we have:
+
+    Header
+    Sidebar
+    Main Content
+    Footer
+
+
+============================================================
+STEP 5 - HEADER USING BOOTSTRAP
+============================================================
+
+Open:
+
+    header.component.html
+
+
+Write:
+
+    <header class="bg-dark text-white p-3">
+
+        <div class="container">
+
+            <h1 class="mb-1">
+                Employee Management System
+            </h1>
+
+            <p class="mb-0">
+                Employee Dashboard
+            </p>
+
+        </div>
+
+    </header>
+
+
+EXPLANATION:
+
+Bootstrap class:
+
+    bg-dark
+
+means:
+
+    Dark background
+
+
+Bootstrap class:
+
+    text-white
+
+means:
+
+    White text
+
+
+Bootstrap class:
+
+    p-3
+
+means:
+
+    Padding
+
+
+Bootstrap class:
+
+    container
+
+gives a centered content area with appropriate width.
+
+
+Bootstrap class:
+
+    mb-1
+
+means:
+
+    margin-bottom
+
+
+Bootstrap class:
+
+    mb-0
+
+means:
+
+    margin-bottom = 0
+
+
+Notice:
+
+We did not write CSS for these things.
+
+Bootstrap already provides them.
+
+
+============================================================
+STEP 6 - SIDEBAR USING BOOTSTRAP
+============================================================
+
+Open:
+
+    sidebar.component.html
+
+
+Write:
+
+    <div class="bg-light p-3 h-100">
+
+        <h4>Menu</h4>
+
+        <ul class="nav flex-column">
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    Dashboard
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    Employees
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    Departments
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    Reports
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+EXPLANATION:
+
+bg-light
+--------
+Light background.
+
+
+p-3
+---
+Padding.
+
+
+h-100
+------
+Height 100%.
+
+
+nav
+---
+Bootstrap navigation.
+
+
+flex-column
+-----------
+Places navigation items vertically.
+
+
+nav-item
+--------
+Represents a navigation item.
+
+
+nav-link
+--------
+Bootstrap styling for links.
+
+
+We are getting a professional-looking sidebar
+without writing much CSS.
+
+
+============================================================
+STEP 7 - MAIN CONTENT USING BOOTSTRAP
+============================================================
+
+Open:
+
+    main-content.component.html
+
+
+Write:
+
+    <main class="p-4">
+
+        <h2>Employee Dashboard</h2>
+
+        <p class="text-muted">
+            Welcome to the Employee Management System.
+        </p>
+
+
+        <div class="row">
+
+
+            <div class="col-md-4">
+
+                <div class="card mb-3">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            Total Employees
+                        </h5>
+
+                        <h2>
+                            120
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card mb-3">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            Active Employees
+                        </h5>
+
+                        <h2>
+                            105
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card mb-3">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            Departments
+                        </h5>
+
+                        <h2>
+                            8
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+============================================================
+UNDERSTANDING BOOTSTRAP GRID
+============================================================
+
+This is important.
+
+We wrote:
+
+    <div class="row">
+
+
+Inside:
+
+    <div class="col-md-4">
+
+
+Bootstrap uses a 12-column grid.
+
+Think:
+
+    12 columns
+    +---+---+---+---+---+---+---+---+---+---+---+---+
+
+
+If we write:
+
+    col-md-4
+
+
+it means:
+
+    4 out of 12 columns.
+
+
+So:
+
+    col-md-4
+    col-md-4
+    col-md-4
+
+
+gives:
+
+    +------------+------------+------------+
+    |            |            |            |
+    |  Column 4  |  Column 4  |  Column 4  |
+    |            |            |            |
+    +------------+------------+------------+
+
+
+4 + 4 + 4 = 12
+
+
+This is one of the most useful Bootstrap concepts.
+
+
+============================================================
+STEP 8 - FOOTER USING BOOTSTRAP
+============================================================
+
+Open:
+
+    footer.component.html
+
+
+Write:
+
+    <footer class="bg-dark text-white text-center p-3">
+
+        <p class="mb-0">
+            Copyright 2026 - Employee Management System
+        </p>
+
+    </footer>
+
+
+We don't need much CSS.
+
+
+============================================================
+STEP 9 - CREATE THE MAIN APPLICATION LAYOUT
+============================================================
+
+Open:
+
+    app.component.html
+
+
+Write:
+
+    <app-header></app-header>
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <app-sidebar></app-sidebar>
+
+            </div>
+
+
+            <div class="col-md-9">
+
+                <app-main-content></app-main-content>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <app-footer></app-footer>
+
+
+============================================================
+UNDERSTANDING THIS LAYOUT
+============================================================
+
+We have:
+
+    container-fluid
+
+This uses the full available screen width.
+
+
+Then:
+
+    row
+
+Creates a Bootstrap row.
+
+
+Then:
+
+    col-md-3
+
+Sidebar gets:
+
+    3 / 12 columns
+
+
+And:
+
+    col-md-9
+
+Main content gets:
+
+    9 / 12 columns
+
+
+Therefore:
+
+    3 + 9 = 12
+
+
+Visually:
+
+    +-------------------+-----------------------------+
+    |                   |                             |
+    |      SIDEBAR      |       MAIN CONTENT          |
+    |       3/12        |          9/12               |
+    |                   |                             |
+    +-------------------+-----------------------------+
+
+
+This is a very important Bootstrap concept.
+
+
+============================================================
+APPLICATION 2 - COMPLETE STRUCTURE
+============================================================
+
+    AppComponent
+          |
+          +---- HeaderComponent
+          |
+          +---- SidebarComponent
+          |
+          +---- MainContentComponent
+          |
+          +---- FooterComponent
+
+
+Layout:
+
+    HEADER
+    ----------------------------
+
+    SIDEBAR  |  MAIN CONTENT
+      3/12   |      9/12
+
+    ----------------------------
+
+    FOOTER
+
+
+============================================================
+BASIC CSS VS BOOTSTRAP
+============================================================
+
+APPLICATION 1:
+
+We manually write:
+
+    display: flex;
+    width: 200px;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin: 10px;
+
+
+APPLICATION 2:
+
+Bootstrap gives us classes:
+
+    bg-dark
+    text-white
+    p-3
+    m-3
+    row
+    col-md-3
+    col-md-9
+    card
+    container
+    container-fluid
+
+
+This is the main purpose of Bootstrap.
+
+It provides reusable CSS classes.
+
+
+============================================================
+IMPORTANT BOOTSTRAP CLASSES FOR BEGINNERS
+============================================================
+
+1. CONTAINER
+------------
+
+    container
+
+Creates a centered responsive container.
+
+
+2. CONTAINER-FLUID
+------------------
+
+    container-fluid
+
+Uses almost the complete width.
+
+
+3. ROW
+------
+
+    row
+
+Creates a Bootstrap row.
+
+
+4. COLUMN
+---------
+
+    col-md-4
+
+Uses 4 out of 12 columns.
+
+
+5. PADDING
+----------
+
+    p-3
+
+Adds padding.
+
+
+Examples:
+
+    p-1
+    p-2
+    p-3
+    p-4
+    p-5
+
+
+6. MARGIN
+---------
+
+    m-3
+
+Adds margin.
+
+
+Examples:
+
+    m-1
+    m-2
+    m-3
+    m-4
+    m-5
+
+
+7. BACKGROUND
+-------------
+
+    bg-dark
+    bg-light
+    bg-primary
+    bg-success
+    bg-warning
+    bg-danger
+
+
+8. TEXT
+-------
+
+    text-white
+    text-dark
+    text-muted
+    text-center
+
+
+9. CARD
+-------
+
+    card
+
+Creates a Bootstrap card.
+
+
+Example:
+
+    <div class="card">
+
+        <div class="card-body">
+
+            Employee Details
+
+        </div>
+
+    </div>
+
+
+10. BUTTON
+----------
+
+    btn btn-primary
+
+
+Example:
+
+    <button class="btn btn-primary">
+        Add Employee
+    </button>
+
+
+============================================================
+HOW TO EXPLAIN CSS TO BEGINNERS
+============================================================
+
+Do not start with complicated CSS theory.
+
+Start with:
+
+HTML = Structure
+
+CSS = Design
+
+Angular = Application logic + components
+
+
+Example:
+
+    <button>
+        Add Employee
+    </button>
+
+
+HTML gives us:
+
+    Button
+
+
+CSS gives us:
+
+    Color
+    Size
+    Spacing
+    Position
+
+
+Angular gives us:
+
+    What should happen when button is clicked?
+
+
+For example:
+
+    <button (click)="addEmployee()">
+        Add Employee
+    </button>
+
+
+Here:
+
+    HTML
+       ↓
+    Button
+
+    CSS
+       ↓
+    Button appearance
+
+    Angular
+       ↓
+    Button behavior
+
+
+============================================================
+HOW TO EXPLAIN COMPONENTS
+============================================================
+
+Tell participants:
+
+"Instead of creating one huge HTML file,
+we divide the application into small pieces."
+
+
+For example:
+
+    Application
+        |
+        +---- Header
+        |
+        +---- Sidebar
+        |
+        +---- Main Content
+        |
+        +---- Footer
+
+
+Each piece is a component.
+
+
+HeaderComponent:
+
+    Responsible for Header
+
+
+SidebarComponent:
+
+    Responsible for Navigation
+
+
+MainContentComponent:
+
+    Responsible for Main Content
+
+
+FooterComponent:
+
+    Responsible for Footer
+
+
+This makes the application easier to:
+
+    Develop
+    Understand
+    Maintain
+    Reuse
+
+
+============================================================
+IMPORTANT ANGULAR CONCEPT - SELECTOR
+============================================================
+
+Inside:
+
+    header.component.ts
+
+
+you will see something similar to:
+
+    selector: 'app-header'
+
+
+That means we can use:
+
+    <app-header></app-header>
+
+
+Similarly:
+
+    selector: 'app-sidebar'
+
+
+means:
+
+    <app-sidebar></app-sidebar>
+
+
+And:
+
+    selector: 'app-footer'
+
+
+means:
+
+    <app-footer></app-footer>
+
+
+Simple rule:
+
+    Angular component selector
+              ↓
+        Custom HTML tag
+
+
+============================================================
+FINAL COMPARISON
+============================================================
+
+APPLICATION 1:
+
+    Angular
+       +
+    HTML
+       +
+    Basic CSS
+
+
+You learn:
+
+    How layout actually works.
+
+
+APPLICATION 2:
+
+    Angular
+       +
+    HTML
+       +
+    Bootstrap
+
+
+You learn:
+
+    How to create the same layout faster
+    using ready-made CSS classes.
+
+
+============================================================
+TEACHING ORDER
+============================================================
+
+I recommend teaching this in this exact order:
+
+DAY/SESSION FLOW:
+
+    1. What is HTML?
+           ↓
+    2. What is CSS?
+           ↓
+    3. What is a web page layout?
+           ↓
+    4. Header
+           ↓
+    5. Sidebar
+           ↓
+    6. Main Content
+           ↓
+    7. Footer
+           ↓
+    8. What is an Angular Component?
+           ↓
+    9. Create Header Component
+           ↓
+    10. Create Sidebar Component
+           ↓
+    11. Create Main Content Component
+           ↓
+    12. Create Footer Component
+           ↓
+    13. Combine Components
+           ↓
+    14. Understand display:flex
+           ↓
+    15. Build complete CSS layout
+           ↓
+    16. Introduce Bootstrap
+           ↓
+    17. Install Bootstrap
+           ↓
+    18. container
+           ↓
+    19. row
+           ↓
+    20. col-md-3 / col-md-9
+           ↓
+    21. Bootstrap navigation
+           ↓
+    22. Bootstrap cards
+           ↓
+    23. Bootstrap buttons
+           ↓
+    24. Build complete Bootstrap layout
+
+
+============================================================
+FINAL MESSAGE TO PARTICIPANTS
+============================================================
+
+Remember these four things:
+
+    HEADER
+    SIDEBAR
+    MAIN CONTENT
+    FOOTER
+
+
+Angular helps us divide them into components.
+
+HTML creates the structure.
+
+CSS controls the design.
+
+Bootstrap gives us ready-made CSS classes.
+
+Angular Components give us a clean way to divide
+a large application into smaller reusable pieces.
+
+
+The final architecture is:
+
+             Angular Application
+                     |
+        +------------+------------+
+        |            |            |
+      Header       Sidebar       Footer
+                     |
+                Main Content
+
+
+And later, Main Content can become:
+
+    Employee List
+    Employee Form
+    Product List
+    Product Form
+    Dashboard
+    Reports
+
+
+This same layout can therefore be reused for
+real-world Angular applications.
